@@ -1,11 +1,12 @@
 {
   "name": "dynamsoft-capture-vision-std",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "The Dynamsoft Capture Vision STD module is a collection of classes and functions that facilitate the execution of other modules within the Dynamsoft Capture Vision architecture.",
   "main": "std.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"No need to build.\"",
+    "build": "node ./codeChange.js && node ./compressCore.js",
+    "build-dev": "node ./codeChange.js",
     "update:readme": "updateReadme --package=dynamsoft-capture-vision-std --version=latest --no-html",
     "update:prod": "updatePackage --package=dynamsoft-capture-vision-std --version=auto --env=production --tag=latest",
     "update:beta": "updatePackage --package=dynamsoft-capture-vision-std --version=auto --env=beta --tag=beta",
@@ -14,7 +15,7 @@
     "updateLink:npm": "updateLink --source=npm",
     "updateLink:zip": "updateLink --source=zip",
     "updateLink:github": "updateLink --source=github",
-    "easyPublish": "npm run update:dev && npm publish"
+    "easyPublish": "npm run update:dev && npm run build-dev && npm publish"
   },
   "keywords": [
     "webassembly",
@@ -29,6 +30,7 @@
     "/dist/*.wasm",
     "/LEGAL.txt"
   ],
+  "type": "module",
   "license": "SEE LICENSE IN LICENSE",
   "sideEffects": false,
   "publishConfig": {
@@ -50,6 +52,7 @@
     }
   ],
   "devDependencies": {
-    "@dynamsoft/rd2-scripts": "^0.1.4"
+    "@dynamsoft/rd2-scripts": "^0.1.8",
+    "terser": "^5.29.2"
   }
 }
